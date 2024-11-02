@@ -4,18 +4,64 @@
  */
 package Views;
 
+import Logic.ClassType;
+import Logic.Passenger;
+import Logic.SeatType;
+
 /**
  *
  * @author lmfg0
  */
 public class RegisterPassenger extends javax.swing.JFrame {
-
+    
+    private Passenger _passenger;
+    private boolean isCorrect;
+  
     /**
      * Creates new form RegisterPassenger
      */
     public RegisterPassenger() {
         initComponents();
         addButtonGroup();
+        this._passenger = new Passenger();
+        this.isCorrect = false;
+        showInformation();
+    }
+    
+    public boolean IsCorrect() {
+        return isCorrect;
+    }
+    
+    public void setInfoPassenger(Passenger passenger){
+        this._passenger = passenger;
+        showInformation();
+    }
+    
+    public Passenger getInfoPassenger(){
+        return this._passenger;
+    }
+    
+    private void showInformation(){
+        txtFullName.setText(_passenger.getName());
+        txtId.setText(_passenger.getId());
+        
+        if (_passenger.getClassType() == ClassType.Economy){
+            buttonEconomy.setSelected(true);
+        } else {
+            buttonExecutive.setSelected(true);
+        }
+        
+        switch (_passenger.getSeatType()) {
+            case Window:
+                buttonWindowSeat.setSelected(true);
+                break;
+            case Aisle:
+                buttonAisleSeat.setEnabled(true);
+                break;
+            default:
+                buttonMiddleSeat.setEnabled(true);
+                break;
+        }
     }
     
     private void addButtonGroup(){
@@ -52,8 +98,8 @@ public class RegisterPassenger extends javax.swing.JFrame {
         buttonWindowSeat = new javax.swing.JRadioButton();
         buttonAisleSeat = new javax.swing.JRadioButton();
         buttonMiddleSeat = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        buttonAceept = new javax.swing.JButton();
+        buttonCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,22 +136,37 @@ public class RegisterPassenger extends javax.swing.JFrame {
         jLabel6.setText("SEAT PREFERENCE");
 
         buttonWindowSeat.setText("WINDOW SEAT");
-
-        buttonAisleSeat.setText("AISLE SEAT");
-
-        buttonMiddleSeat.setText("MIDDLE SEAT");
-
-        jButton1.setText("ACCEPT");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonWindowSeat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                buttonWindowSeatActionPerformed(evt);
             }
         });
 
-        jButton2.setText("CANCEL");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        buttonAisleSeat.setText("AISLE SEAT");
+        buttonAisleSeat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                buttonAisleSeatActionPerformed(evt);
+            }
+        });
+
+        buttonMiddleSeat.setText("MIDDLE SEAT");
+        buttonMiddleSeat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonMiddleSeatActionPerformed(evt);
+            }
+        });
+
+        buttonAceept.setText("ACCEPT");
+        buttonAceept.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAceeptActionPerformed(evt);
+            }
+        });
+
+        buttonCancel.setText("CANCEL");
+        buttonCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCancelActionPerformed(evt);
             }
         });
 
@@ -149,9 +210,9 @@ public class RegisterPassenger extends javax.swing.JFrame {
                         .addComponent(jLabel4))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(113, 113, 113)
-                        .addComponent(jButton1)
+                        .addComponent(buttonAceept)
                         .addGap(45, 45, 45)
-                        .addComponent(jButton2)))
+                        .addComponent(buttonCancel)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -184,8 +245,8 @@ public class RegisterPassenger extends javax.swing.JFrame {
                     .addComponent(buttonAisleSeat))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(buttonAceept)
+                    .addComponent(buttonCancel))
                 .addGap(30, 30, 30))
         );
 
@@ -198,21 +259,39 @@ public class RegisterPassenger extends javax.swing.JFrame {
 
     private void buttonExecutiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExecutiveActionPerformed
         buttonMiddleSeat.setSelected(false);
-        buttonMiddleSeat.setEnabled(false);      
+        buttonMiddleSeat.setEnabled(false);
+        _passenger.setClassType(ClassType.Executive);
     }//GEN-LAST:event_buttonExecutiveActionPerformed
 
     private void buttonEconomyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEconomyActionPerformed
-        buttonMiddleSeat.setEnabled(true);        
+        buttonMiddleSeat.setEnabled(true);
+        _passenger.setClassType(ClassType.Economy);
+        
     }//GEN-LAST:event_buttonEconomyActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void buttonAceeptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAceeptActionPerformed
+        _passenger.setName(txtFullName.getText());
+        _passenger.setId(txtId.getText());
+        isCorrect = true;
+        dispose();
+    }//GEN-LAST:event_buttonAceeptActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
+        dispose();
+    }//GEN-LAST:event_buttonCancelActionPerformed
 
+    private void buttonWindowSeatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonWindowSeatActionPerformed
+        _passenger.setSeatType(SeatType.Window);        
+    }//GEN-LAST:event_buttonWindowSeatActionPerformed
+
+    private void buttonMiddleSeatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMiddleSeatActionPerformed
+        _passenger.setSeatType(SeatType.Middle);
+    }//GEN-LAST:event_buttonMiddleSeatActionPerformed
+
+    private void buttonAisleSeatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAisleSeatActionPerformed
+        _passenger.setSeatType(SeatType.Aisle);
+    }//GEN-LAST:event_buttonAisleSeatActionPerformed
+    
     /**
      * @param args the command line arguments
      */
@@ -249,15 +328,15 @@ public class RegisterPassenger extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonAceept;
     private javax.swing.JRadioButton buttonAisleSeat;
+    private javax.swing.JButton buttonCancel;
     private javax.swing.JRadioButton buttonEconomy;
     private javax.swing.JRadioButton buttonExecutive;
     private javax.swing.ButtonGroup buttonGroupClassType;
     private javax.swing.ButtonGroup buttonGroupSeatPreference;
     private javax.swing.JRadioButton buttonMiddleSeat;
     private javax.swing.JRadioButton buttonWindowSeat;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

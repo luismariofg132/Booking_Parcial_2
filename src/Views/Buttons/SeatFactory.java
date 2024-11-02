@@ -15,9 +15,10 @@ public class SeatFactory implements Button{
     private int x, y, width, height;
     private String title;
     private String type;
+    private boolean occupied = false; 
 
     public SeatFactory(String type, int x, int y, int width, int height, String title) {
-        this.type = type.toLowerCase();  // Guarda el tipo en minúsculas para comparación
+        this.type = type;
         this.x = x;
         this.y = y;
         this.width = width;
@@ -35,6 +36,8 @@ public class SeatFactory implements Button{
     public JButton createButton() {
         JButton button = new JButton(title);
         button.setBounds(x, y, width, height);
+        String seatId = type + "_" + title;
+        button.setName(seatId);
         
         if ("executive".equals(type)) {
             button.setBackground(Color.BLUE);  // Color específico para silla ejecutiva
@@ -49,5 +52,13 @@ public class SeatFactory implements Button{
 
         button.setFocusPainted(false);  // Sin borde de foco
         return button;
+    }
+    
+    public boolean isOccupied() {
+        return occupied;
+    }
+
+    public void setOccupied(boolean occupied) {
+        this.occupied = occupied;
     }
 }

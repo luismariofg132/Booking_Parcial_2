@@ -3,12 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/lmfg0/Desktop/Progra%204/ReservasFinal/src/Views/RegisterPassenger.java</file>
+            <file>file:/C:/Users/lmfg0/Desktop/Progra%204/ReservasFinal/src/FrameComponents/JPanelImage.java</file>
             <file>file:/C:/Users/lmfg0/Desktop/Progra%204/ReservasFinal/src/Views/Buttons/SeatFactory.java</file>
             <file>file:/C:/Users/lmfg0/Desktop/Progra%204/ReservasFinal/src/Views/Buttons/Button.java</file>
             <file>file:/C:/Users/lmfg0/Desktop/Progra%204/ReservasFinal/src/reservasfinal/ReservasFinal.java</file>
+            <file>file:/C:/Users/lmfg0/Desktop/Progra%204/ReservasFinal/src/Logic/Passenger.java</file>
             <file>file:/C:/Users/lmfg0/Desktop/Progra%204/ReservasFinal/src/Logic/Plane.java</file>
             <file>file:/C:/Users/lmfg0/Desktop/Progra%204/ReservasFinal/src/Views/MainPlane.java</file>
             <file>file:/C:/Users/lmfg0/Desktop/Progra%204/ReservasFinal/src/Controller/PlaneController.java</file>
+            <file>file:/C:/Users/lmfg0/Desktop/Progra%204/ReservasFinal/src/Logic/ClassType.java</file>
+            <file>file:/C:/Users/lmfg0/Desktop/Progra%204/ReservasFinal/src/Logic/SeatType.java</file>
         </group>
     </open-files>
 </project-private>

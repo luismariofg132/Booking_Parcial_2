@@ -4,10 +4,14 @@
  */
 package Views;
 
-import FrameComponents.JPanelImage;
+import Logic.Passenger;
 import Views.Buttons.SeatFactory;
-import java.awt.Color;
-import java.awt.Point;
+import java.awt.Component;
+import java.awt.List;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import javax.swing.JButton;
 
 /**
  *
@@ -17,7 +21,8 @@ public class MainPlane extends javax.swing.JFrame {
     
     private int amountEconomy;
     private int amountExecutive;
-
+//    private final List<SeatFactory> listSeat = new ArrayList<>();
+    
     public MainPlane(int amountEconomy, int amountExecutive) {
         this.amountEconomy = amountEconomy;
         this.amountExecutive = amountExecutive;
@@ -54,7 +59,8 @@ public class MainPlane extends javax.swing.JFrame {
         for (int i = 0; i < amount; i++) {
             SeatFactory seat = new SeatFactory(type, currentX, currentY, seatWidth, seatHeight, String.valueOf(i + 1));
             getContentPane().add(seat.createButton());
-        
+//            listSeat.Add(seat);
+            
             // Ajuste de posición en X y control de columnas
             if (column < maxColumns) {
                 currentX += (column % (maxColumns / 2) == 0) ? incrementLarge : incrementSmall;
@@ -120,9 +126,40 @@ public class MainPlane extends javax.swing.JFrame {
     private void buttonRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRegisterActionPerformed
         RegisterPassenger register = new RegisterPassenger();
         register.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        System.out.print("funciona");
+        register.addWindowListener(new WindowAdapter(){
+                @Override
+                public void windowClosed(WindowEvent e){                
+                    if (register.IsCorrect()){
+                        onWindowClose(e, register.getInfoPassenger());
+                    }                                     
+                }
+            }     
+        );
         register.setVisible(true);
     }//GEN-LAST:event_buttonRegisterActionPerformed
 
+    private void onWindowClose(WindowEvent e, Passenger passenger){
+        JButton button = findButtonById("economy_1");
+        button.setText("Reservado");
+        button.revalidate();
+        button.repaint();
+    }
+    
+    public JButton findButtonById(String id) {
+        for (Component comp : getContentPane().getComponents()) {
+            if (comp instanceof JButton) {
+                JButton button = (JButton) comp;
+                if (id.equals(button.getName())) {
+                    return button;
+            }
+        }
+    }
+    System.out.println("Botón con ID " + id + " no encontrado.");
+    return null;  // Retorna null si no encuentra el botón
+}
+
+    
     /**
      * @param args the command line arguments
      */
