@@ -107,9 +107,26 @@ public class RegisterPassenger extends javax.swing.JFrame {
 
         jLabel2.setText("FULL NAME");
 
+        txtFullName.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                txtFullNameInputMethodTextChanged(evt);
+            }
+        });
         txtFullName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtFullNameActionPerformed(evt);
+            }
+        });
+        txtFullName.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                txtFullNamePropertyChange(evt);
+            }
+        });
+        txtFullName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtFullNameKeyPressed(evt);
             }
         });
 
@@ -291,6 +308,22 @@ public class RegisterPassenger extends javax.swing.JFrame {
     private void buttonAisleSeatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAisleSeatActionPerformed
         _passenger.setSeatType(SeatType.Aisle);
     }//GEN-LAST:event_buttonAisleSeatActionPerformed
+
+    private void txtFullNameInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_txtFullNameInputMethodTextChanged
+
+        
+    }//GEN-LAST:event_txtFullNameInputMethodTextChanged
+
+    private void txtFullNamePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtFullNamePropertyChange
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_txtFullNamePropertyChange
+
+    private void txtFullNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFullNameKeyPressed
+        if (txtFullName.getText().matches(".*\\d.*")){
+            txtFullName.setText("");
+        }
+    }//GEN-LAST:event_txtFullNameKeyPressed
     
     /**
      * @param args the command line arguments
